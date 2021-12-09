@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+<h3>  Insert in file .env your own APIKEY from omdbapi.com </h3>  
+
 ## Available Scripts
 
 In the project directory, you can run:
