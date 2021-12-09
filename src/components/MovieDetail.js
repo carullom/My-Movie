@@ -1,4 +1,4 @@
-export const MovieDetail = ({movie}) => {
+export const MovieDetail = ({movie, error}) => {
     
     return(
         <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -10,6 +10,7 @@ export const MovieDetail = ({movie}) => {
             </div>
             <div className="modal-body">
               {movie?.Plot}
+              {error}
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-sm btn-primary" data-bs-dismiss="modal">Close</button>

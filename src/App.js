@@ -5,8 +5,8 @@ import MovieList from './components/MovieList';
 import { Navbar } from './components/Navbar';
 import { MovieDetail } from './components/MovieDetail';
 
-const APIKEY ='bf4f0ee3';
-const APIURL = 'https://www.omdbapi.com';
+const APIKEY =process.env.REACT_APP_APIKEY;
+const APIURL = process.env.REACT_APP_APIURL;
 
 const fetchMovies = async (search = 'The godfather') => {
   if (search.length < 3) {
@@ -31,12 +31,20 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [error, setError] = useState('');
+  const [errorDetail, setErrorDetail] = useState('');
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const selectMovie = async (movie) =>{
     setSelectedMovie(movie);
     const newMovie = await fetchMoviesById(movie.imdbID);
-    setSelectedMovie(newMovie);
+    if(newMovie.Error){
+      setErrorDetail(newMovie.Error);
+      setSelectedMovie(null);
+
+    }else{
+      setSelectedMovie(newMovie);
+    }
+    
   };
 
   const callApi = async (search = '') => {
@@ -73,7 +81,7 @@ function App() {
         {
           !error ? <MovieList onSelectedMovie={selectMovie} movies={movies} /> : <h2>{ error}</h2>
         } 
-        <MovieDetail movie={selectedMovie}/>
+        <MovieDetail error={errorDetail} movie={selectedMovie}/>
       </div>
       </>
   );
